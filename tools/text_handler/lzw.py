@@ -1,7 +1,5 @@
 import sys, os
 
-import mybeam
-
 def lzw_encode(string: str) -> list:
     '''
     Encode a string to a list of output symbols.
