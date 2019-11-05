@@ -1,4 +1,4 @@
-def pascal_tree(n, base=1):
+def pascal_tree(n: int, base:int = 1) -> dict:
 
     """Makes a dictionary where the keys are row-indexes in a pascal-trangle
     of size n, and the values are the rows as a list. E.g. pascal(3) should
