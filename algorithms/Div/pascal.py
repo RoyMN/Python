@@ -31,6 +31,48 @@ def pascal_tree(n, base=1):
         pascal_dict.update(bottom_row)
         return pascal_dict
         
+def pascal(n: int, method: str = 'memoization') -> int:
+
+    """Calculates pascal number n recursively using memoization,
+    or with optional method specified.
+    
+    :param: n The pascal number to calculate
+    
+    :param: (Optional) method=['memoization', 'dynamic']
+    
+    :returns: int m where m is pascal number n.
+    """
+    
+    assert (method == 'memoization' or method == 'dynamic'),\
+            ('method parameter can only be either memoization or dynamic.')
+    mem = {0: 0, 1: 1, 2: 1}
+    if method == 'memoization':
+        if n in mem:
+            return mem[n]
+        else:
+            return (pascal_memoized(n-1, mem)
+                    + pascal_memoized(n-2, mem))
+    elif method == 'dynamic':
+        for i in range(3,n+1):
+            mem[i] = mem[i-1] + mem[i-2]
+        return mem[n]
+    
+    
+def pascal_memoized(n: int, mem: dict) -> int:
+
+    """Helper function taking a storing dictionary as as
+    a parameter.
+    """
+
+    if n in mem:
+        return mem[n]
+    else:
+        mem[n] = (pascal_memoized(n-1, mem)
+                  + pascal_memoized(n-2, mem))
+        return mem[n]
+        
 if __name__ == '__main__':
 
     print(pascal_tree(7))
+    print(pascal(1000, method='memoization'))
+    print(pascal(1000, method='dynamic'))
